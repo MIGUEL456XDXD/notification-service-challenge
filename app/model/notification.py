@@ -38,3 +38,18 @@ class NotificationChannel(ABC):
     @abstractmethod
     def is_available(self) -> bool:
         pass
+class ConsoleChannel(NotificationChannel):
+    pass
+
+    def send(self, message: str) -> None:
+        try:
+            print(f"[console] {message}")
+        except Exception as e:
+
+            raise DeliveryError(self.get_channel_name(), e)
+
+    def get_channel_name(self) -> str:
+        return "console"
+
+    def is_available(self) -> bool:
+        return True

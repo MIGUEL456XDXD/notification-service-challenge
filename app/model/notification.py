@@ -24,3 +24,17 @@ class DeliveryError(NotificationError):
             msg = f"No se pudo enviar la notificación por '{channel_name}"
 
         super().__init__(msg)
+from abc import ABC, abstractmethod
+
+class NotificationChannel(ABC):
+    @abstractmethod
+    def send(self, message: str) -> None:
+        pass
+
+    @abstractmethod
+    def get_channel_name(self) -> str:
+        pass
+
+    @abstractmethod
+    def is_available(self) -> bool:
+        pass
